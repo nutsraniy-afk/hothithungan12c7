@@ -1,0 +1,184 @@
+<!-- ... existing code ... -->
+                    <!-- Phần 2: Vườn Hoa Lời Chúc 20/10 & Thiệp Chung Của Lớp -->
+                    <div class="pt-4 border-t-2 border-dashed border-pink-200">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div>
+                                <h3 class="font-cute font-bold text-lg sm:text-xl text-pink-600 flex items-center gap-2">
+                                    <span>🌷</span>
+                                    <span>Vườn Hoa Lời Chúc 20/10 Gửi Tặng Cô</span>
+                                </h3>
+                                <p class="text-xs text-pink-400 font-semibold">Những tấm thiệp nhỏ xinh từ các thành viên trong lớp gửi tới Cô</p>
+                            </div>
+                            
+                            <!-- NÚT IN / LƯU SỔ LƯU BÚT TẶNG CÔ (CÁCH 3) -->
+                            <button onclick="printLuuButToPDF()" class="btn-cute bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>In / Lưu Sổ Lưu Bút Tặng Cô</span>
+                            </button>
+                        </div>
+
+                        <!-- Thiệp chúc mừng chính thức của tập thể lớp -->
+                        <div class="bg-gradient-to-r from-rose-50 via-white to-pink-50 border-2 border-pink-300 rounded-3xl p-4 mb-4 shadow-sm relative">
+                            <div class="flex items-center gap-1.5 text-xs font-bold text-rose-500 mb-1">
+                                <span>💐</span>
+                                <span>Thiệp Chúc Mừng Chung Của <span class="class-name-inline">Tập thể lớp 12A1 Yêu Thương 💕</span></span>
+                            </div>
+                            <p id="general-class-wish-display" class="text-xs sm:text-sm text-pink-900 leading-relaxed whitespace-pre-line font-medium"></p>
+                        </div>
+
+                        <!-- Lưới các tấm thiệp nhỏ của từng học sinh -->
+                        <div id="wishes-wall-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-1">
+                            <!-- Sinh tự động bằng JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- TAB 3: CHẾ ĐỘ CÁN BỘ LỚP (CHỈNH ĐỀ & ẢNH CÔ ĐỒNG BỘ)      -->
+                <!-- ========================================================= -->
+<!-- ... existing code ... -->
+        /* Thanh cuộn dễ thương */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff0f5;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f9a8d4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f472b6;
+        }
+
+        /* ========================================================= */
+        /* CÁCH 3: CSS @MEDIA PRINT CHO SỔ LƯU BÚT TẶNG CÔ (PDF)     */
+        /* ========================================================= */
+        @media print {
+            /* Ẩn toàn bộ các thành phần điều hướng, tab, nút bấm chơi game, header ngoài */
+            header,
+            nav,
+            #tab-btn-play,
+            #tab-btn-leaderboard,
+            #tab-btn-admin,
+            #screen-welcome,
+            #screen-quiz,
+            #screen-result,
+            .btn-cute,
+            button,
+            footer,
+            #cute-toast,
+            #petals-container,
+            .no-print {
+                display: none !important;
+            }
+
+            /* Đặt lại giao diện trang giấy in A4/Letter */
+            body {
+                background: #ffffff !important;
+                color: #581c87 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            main {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Dàn trang thành 2 cột hoặc khối lưu bút trang trọng dành cho Cô */
+            .grid.grid-cols-1.lg\:grid-cols-12 {
+                display: block !important;
+            }
+
+            /* Khung trái (Ảnh cô) biến thành header trang trọng ở đầu trang in */
+            aside.lg\:col-span-4 {
+                width: 100% !important;
+                background: #fff0f5 !important;
+                border: 2px solid #f472b6 !important;
+                border-radius: 1rem !important;
+                padding: 20px !important;
+                margin-bottom: 20px !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            /* Khung phải (Tab Xếp hạng & Vườn hoa) hiển thị trọn vẹn nội dung lưu bút */
+            section.lg\:col-span-8 {
+                width: 100% !important;
+                background: #ffffff !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+
+            #tab-content-leaderboard {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            /* Bỏ giới hạn chiều cao cuộn để khi in hiện đầy đủ danh sách thiệp */
+            #leaderboard-list-body,
+            #wishes-wall-grid {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            /* Định dạng các thẻ thiệp chúc mừng khi in */
+            .cute-card, div[class*="bg-gradient"] {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border-color: #f9a8d4 !important;
+            }
+
+            /* Tiêu đề trang in */
+            .print-title-header {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+
+        .print-title-header {
+            display: none;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between p-3 sm:p-5 select-none">
+<!-- ... existing code ... -->
+        // ==========================================
+        // 8. HIỆU ỨNG PHÁO HOA & CÁNH HOA RƠI
+        // ==========================================
+        function fireSmallConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 65,
+                    origin: { y: 0.65 },
+                    colors: ['#FF69B4', '#FFB6C1', '#FB7185', '#F472B6', '#FDE047']
+                });
+            }
+        }
+
+        // ==========================================
+        // CÁCH 3: KÍCH HOẠT HỘP THOẠI IN / LƯU PDF SỔ LƯU BÚT
+        // ==========================================
+        window.printLuuButToPDF = function() {
+            // Tự động chuyển sang tab Bảng xếp hạng & Vườn hoa để chắc chắn nội dung đang hiển thị
+            if (typeof switchTab === 'function') {
+                switchTab('leaderboard');
+            }
+            if (typeof showToast === 'function') {
+                showToast("Đang chuẩn bị Sổ Lưu Bút để In / Lưu PDF tặng Cô... 🌸");
+            }
+            
+            setTimeout(() => {
+                window.print();
+            }, 400);
+        };
+
+        window.triggerHeartShower = function() {
+// ... existing code ...
